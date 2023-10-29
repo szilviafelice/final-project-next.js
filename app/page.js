@@ -1,8 +1,10 @@
 import Image from 'next/image';
-import styles from './page.module.css';
 
 export default function Home() {
   return (
-    <main> Bucket list planner </main>
+    <main>
+
+<Image src="/neonDot.png" alt="neon dot" width={1000} height={853} />
+    </main>
   )
 }
