@@ -4,12 +4,11 @@ export async function up(sql: Sql) {
 
   await sql `
 
-    CREATE TABLE admin (
+    CREATE TABLE users (
     id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     user_id integer UNIQUE REFERENCES users(id),
     is_admin boolean NOT NULL,
     admin_permissions varchar
-
     );
   `;
   }
@@ -18,7 +17,7 @@ export async function up(sql: Sql) {
   export async function down(sql: Sql) {
 
     await sql `
-      DROP TABLE admin
+      DROP TABLE users
 
     `;
   }
