@@ -1,14 +1,30 @@
 import { Sql } from 'postgres';
 
+export type Users = {
+      id: number;
+      firstName: string;
+      lastName: string;
+      username: string;
+      passwordHash: string;
+      email: string;
+      googleId: string | null;
+      uiPreference: boolean;
+};
+
+
 export async function up(sql: Sql) {
 
   await sql `
 
     CREATE TABLE users (
-    id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    user_id integer UNIQUE REFERENCES users(id),
-    is_admin boolean NOT NULL,
-    admin_permissions varchar
+        id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+        first_name VARCHAR(30) NOT NULL,
+        last_name VARCHAR(30) NOT NULL,
+        username VARCHAR(30) NOT NULL UNIQUE,
+        password_hash VARCHAR(80) NOT NULL,
+        email VARCHAR(100) NOT NULL UNIQUE,
+        google_id VARCHAR(80),
+        ui_preference BOOLEAN NOT NULL
     );
   `;
   }
