@@ -1,16 +1,15 @@
 import { Sql } from 'postgres';
 
-export type Users = {
+export type User = {
       id: number;
+      username: string;
       firstName: string;
       lastName: string;
-      username: string;
       passwordHash: string;
       email: string;
       googleId: string | null;
-      uiPreference: boolean;
+      uiPreference: boolean | null;
 };
-
 
 export async function up(sql: Sql) {
 
@@ -20,7 +19,7 @@ export async function up(sql: Sql) {
         id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
         first_name VARCHAR(30) NOT NULL,
         last_name VARCHAR(30) NOT NULL,
-        username VARCHAR(30) NOT NULL UNIQUE,
+        username VARCHAR(80) NOT NULL UNIQUE,
         password_hash VARCHAR(80) NOT NULL,
         email VARCHAR(100) NOT NULL UNIQUE,
         google_id VARCHAR(80),
@@ -28,7 +27,6 @@ export async function up(sql: Sql) {
     );
   `;
   }
-
 
   export async function down(sql: Sql) {
 

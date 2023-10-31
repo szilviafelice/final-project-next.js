@@ -2,6 +2,18 @@ import { readFileSync } from 'node:fs';
 import dotenv from 'dotenv';
 import postgres from 'postgres';
 
+/* type User = {
+  id: number;
+  firstName: string;
+  lastName: string;
+  username: string;
+  passwordHash: string;
+  email: string;
+  googleId: string | null;
+  uiPreference: boolean | null;
+}; */
+
+
 export function setEnviromentVariables() {
 
 
@@ -21,12 +33,12 @@ export function setEnviromentVariables() {
 
   setEnviromentVariables();
 
-  const sql = postgres ();
+  export const sql = postgres ();
 
-  export async function getAllBucketsFromDatabase() {
-    const animals = await sql`
+  export async function getAllUsersFromDatabase() {
+    const users = await sql<{ id: number; firstName: string; lastName: string; username: string; passwordHash: string; email: string; googleId: string | null; uiPreference: boolean | null; }[]>`
 
-    SELECT * FROM buckets
+    SELECT * FROM users
     `
-  return animals;
+  return users;
   }
