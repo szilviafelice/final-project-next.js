@@ -1,5 +1,7 @@
+import bcrypt from 'bcrypt';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { createUser, getUserByUsername } from '../../../../database/users';
 import { User } from '../../../../migrations/00001-createTableUsers';
 
 const registerSchema = z.object({
@@ -32,7 +34,31 @@ export async function POST(request: NextRequest): Promise<NextResponse<RegisterR
     );
   }
 
-  console.log('Result: ', result);
+  const user = await getUserByUsername(result.data.username);
+
+  if (user) {
+    return NextResponse.json(
+      { errors: [{ message: 'username is already taken' }] },
+      {
+        status: 403,
+      },
+    );
+  }
+
+  const passwordHash = await bcrypt.hash(result.data.password, 12);
+
+  console.log('Result: ', passwordHash, result.data.password);
+
+  const newUser = await createUser(result.data.username, passwordHash);
+
+  if (!newUser) {
+    return NextResponse.json(
+      { errors: [{ message: 'Error creating the new user' }] },
+      { status: 406 },
+    );
+  }
+
+  console.log('Result: ', newUser);
 
 
   return NextResponse.json({
