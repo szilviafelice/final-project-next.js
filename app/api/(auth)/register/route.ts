@@ -61,12 +61,9 @@ export async function POST(request: NextRequest): Promise<NextResponse<RegisterR
       { status: 406 },
     );
   }
-  console.log('Result: ', newUser);
 
   return NextResponse.json({
-    user: {
-      username: "hello",
-    },
+      user: newUser,
   });
 
 }
