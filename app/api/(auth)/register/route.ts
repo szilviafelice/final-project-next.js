@@ -48,19 +48,19 @@ export async function POST(request: NextRequest): Promise<NextResponse<RegisterR
 
   const passwordHash = await bcrypt.hash(result.data.password, 12);
 
-  const newUser = await (
+  const newUser = await createUser(
     result.data.firstname,
     result.data.lastname,
     result.data.username,
     passwordHash,
     result.data.email);
 
-  /* if (!newUser) {
+  if (!newUser) {
     return NextResponse.json(
       { errors: [{ message: 'Error creating the new user' }] },
       { status: 406 },
     );
-  } */
+  }
   console.log('Result: ', newUser);
 
   return NextResponse.json({
