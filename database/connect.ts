@@ -36,7 +36,7 @@ export function setEnviromentVariables() {
   export const sql = postgres ();
 
   export async function getAllUsersFromDatabase() {
-    const users = await sql<{ id: number; firstName: string; lastName: string; username: string; passwordHash: string; email: string; googleId: string | null; uiPreference: boolean | null; }[]>`
+    const users = await sql<{ id: number; firstName: string; lastName: string; username: string; passwordHash: string; email: string;  uiPreference: boolean | null; }[]>`
 
     SELECT * FROM users
     `

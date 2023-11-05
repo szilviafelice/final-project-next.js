@@ -1,4 +1,4 @@
-const notifications = [
+/* const notifications = [
   {
     id: '1',
     userId: '',
@@ -7,4 +7,4 @@ const notifications = [
     notificationTimestamp: '',
 
   },
-];
+]; */

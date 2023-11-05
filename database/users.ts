@@ -1,3 +1,4 @@
+/* eslint-disable @ts-safeql/check-sql */
 import { cache } from 'react';
 import { sql } from '../database/connect';
 import { User } from '../migrations/00001-createTableUsers';
@@ -7,21 +8,19 @@ export type UserWithPasswordHash = User & {
 };
 
 export const createUser = cache(
-  async (username: string, passwordHash: string) => {
+  async (firstname: string, lastname: string, username: string, passwordHash: string, email: string) => {
     const [user] = await sql<User[]>`
+
   INSERT INTO users
-  (username, password_hash)
+  (first_name, last_name, username, password_hash, email)
   VALUES
-    (${username.toLowerCase()}, ${passwordHash})
+    (${firstname}, ${lastname}, ${username.toLowerCase()}, ${passwordHash}, ${email})
   RETURNING
     id,
+    first_name,
+    last_name,
     username,
-    first_name AS "firstName",
-    last_name AS "lastName",
-    password_hash AS "passwordHash",
-    email,
-    google_id AS "googleId",
-    ui_preference AS "uiPreference"
+    email
     `;
     return user;
   },

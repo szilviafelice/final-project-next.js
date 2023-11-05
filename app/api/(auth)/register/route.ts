@@ -5,9 +5,11 @@ import { createUser, getUserByUsername } from '../../../../database/users';
 import { User } from '../../../../migrations/00001-createTableUsers';
 
 const registerSchema = z.object({
+    firstname: z.string().min(2),
+    lastname: z.string().min(2),
     username: z.string().min(3),
     password: z.string().min(3),
-
+    email: z.string().min(5)
 })
 
 export type RegisterResponseBodyPost =
@@ -17,7 +19,6 @@ export type RegisterResponseBodyPost =
     | {
       errors: { message: string }[];
     };
-
 
 export async function POST(request: NextRequest): Promise<NextResponse<RegisterResponseBodyPost>> {
 
@@ -47,19 +48,20 @@ export async function POST(request: NextRequest): Promise<NextResponse<RegisterR
 
   const passwordHash = await bcrypt.hash(result.data.password, 12);
 
-  console.log('Result: ', passwordHash, result.data.password);
+  const newUser = await (
+    result.data.firstname,
+    result.data.lastname,
+    result.data.username,
+    passwordHash,
+    result.data.email);
 
-  const newUser = await createUser(result.data.username, passwordHash);
-
-  if (!newUser) {
+  /* if (!newUser) {
     return NextResponse.json(
       { errors: [{ message: 'Error creating the new user' }] },
       { status: 406 },
     );
-  }
-
+  } */
   console.log('Result: ', newUser);
-
 
   return NextResponse.json({
     user: {
