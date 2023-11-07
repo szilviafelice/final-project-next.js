@@ -35,7 +35,26 @@ export async function POST(request: NextRequest): Promise<NextResponse<LoginResp
 
   const userWithPasswordHash = await getUserWithPasswordHashByUsername(result.data.username);
 
+
+  console.log("userWithPasswordHash:", userWithPasswordHash);
+
   if (!userWithPasswordHash) {
+    return NextResponse.json(
+      { errors: [{ message: 'username or password not valid' }] },
+      {
+        status: 403
+      },
+    );
+  }
+
+
+
+  const isPasswordValid = await bcrypt.compare(
+    result.data.password,
+    userWithPasswordHash.passwordHash,
+  );
+
+  if (!isPasswordValid) {
     return NextResponse.json(
       { errors: [{ message: 'username or password not valid' }] },
       {
@@ -44,11 +63,8 @@ export async function POST(request: NextRequest): Promise<NextResponse<LoginResp
     );
   }
 
-  const isPasswordValid = await bcrypt.compare(
-    result.data.password,
-    userWithPasswordHash.passwordHash);
 
-    console.log('Check Valid : ', isPasswordValid, result.data.password, userWithPasswordHash.passwordHash);
+
 
   /* const newUser = await createUser(
     result.data.username,

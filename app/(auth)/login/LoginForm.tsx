@@ -2,14 +2,13 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-/* import { RegisterResponseBodyPost } from '../../api/(auth)/register/route'; */
+/* import { LoginResponseBodyPost } from '../../api/(auth)/login/route'; */
 
 export default function LoginForm() {
 
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
     const [errors, setErrors] = useState<{ message: string }[]>([]);
     const router = useRouter();
 
@@ -51,10 +50,11 @@ export default function LoginForm() {
       </label>
       <label>
         Password
-        <input type="password" onChange={(event) => setPassword(event.currentTarget.value)} />
+        <input type="password"
+        onChange={(event) => setPassword(event.currentTarget.value)} />
       </label>
 
-      <button  >Login</button>
+      <button>Login</button>
 
       {errors.map((error) => (
         <div className="error" key={`error-${error.message}`}>

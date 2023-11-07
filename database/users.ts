@@ -49,11 +49,17 @@ export const getUserWithPasswordHashByUsername = cache(async (username: string) 
 
     SELECT
       id,
-      username
+      username,
+      first_name AS "firstName",
+      last_name AS "lastName",
+      password_hash AS "passwordHash",
+      email,
+      ui_preference AS "uiPreference"
     FROM
       users
     WHERE
-      username = ${username}
+    username = ${username.toLowerCase()}
   `;
     return user;
-});
+},
+);
