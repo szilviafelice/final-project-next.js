@@ -1,10 +1,14 @@
 'use client'
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { getSafeReturnToPath } from '../../../util/validation';
+import { LoginResponseBodyPost } from '../../api/(auth)/login/route';
 
 /* import { LoginResponseBodyPost } from '../../api/(auth)/login/route'; */
 
-export default function LoginForm() {
+type Props = { returnTo?: string | string[] };
+
+export default function LoginForm(props: Props) {
 
 
     const [username, setUsername] = useState('');
@@ -24,21 +28,18 @@ export default function LoginForm() {
     });
 
 
-    const data = await response.json();
+    const data: LoginResponseBodyPost = await response.json();
 
     if ('errors' in data) {
       setErrors(data.errors);
       return;
     }
 
-    router.push(`/`);
 
-    /* if (response.ok) {
-      const data = await response.json();
-      console.log('Check: ', data);
-  } else {
-      console.error(`Error occurred: ${response.statusText}`);
-  } */
+    router.push(
+      getSafeReturnToPath(props.returnTo) || `/profile/${data.user.username}`,
+    );
+
 }
 
   return (

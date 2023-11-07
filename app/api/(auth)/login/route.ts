@@ -2,7 +2,6 @@ import bcrypt from 'bcrypt';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { getUserWithPasswordHashByUsername } from '../../../../database/users';
-import { User } from '../../../../migrations/00001-createTableUsers';
 
 const loginSchema = z.object({
     username: z.string().min(3),
@@ -11,7 +10,7 @@ const loginSchema = z.object({
 
 export type LoginResponseBodyPost =
     | {
-      user: User;
+      user: { username: string };
     }
     | {
       errors: { message: string }[];
@@ -36,8 +35,6 @@ export async function POST(request: NextRequest): Promise<NextResponse<LoginResp
   const userWithPasswordHash = await getUserWithPasswordHashByUsername(result.data.username);
 
 
-  console.log("userWithPasswordHash:", userWithPasswordHash);
-
   if (!userWithPasswordHash) {
     return NextResponse.json(
       { errors: [{ message: 'username or password not valid' }] },
@@ -46,8 +43,6 @@ export async function POST(request: NextRequest): Promise<NextResponse<LoginResp
       },
     );
   }
-
-
 
   const isPasswordValid = await bcrypt.compare(
     result.data.password,
@@ -64,22 +59,10 @@ export async function POST(request: NextRequest): Promise<NextResponse<LoginResp
   }
 
 
-
-
-  /* const newUser = await createUser(
-    result.data.username,
-    passwordHash
-    );
-
-  if (!newUser) {
-    return NextResponse.json(
-      { errors: [{ message: 'Error creating the new user' }] },
-      { status: 406 },
-    );
-  } */
-
   return NextResponse.json({
-      user: 'newUser',
-  });
+      user: {
+        username: userWithPasswordHash.username,
+  },
+});
 
 }
