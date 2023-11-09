@@ -31,3 +31,33 @@ export const createSession = cache(
 
   return session;
 });
+
+export const deleteSessionByToken = cache(async (token: string) => {
+  // console.log('Database Token: ', token);
+
+  const [session] = await sql<{ id: number; token: string }[]>`
+    DELETE FROM sessions
+    WHERE
+      sessions.token = ${token} RETURNING id,
+      token
+  `;
+
+  // console.log('database response: ', session);
+  return session;
+});
+
+export const getValidSessionByToken = cache(async (token: string) => {
+  const [session] = await sql<{ id: number; token: string }[]>`
+    SELECT
+      sessions.id,
+      sessions.token
+    FROM
+      sessions
+    WHERE
+      sessions.token = ${token}
+    AND
+      sessions.expiry_timestamp > now ()
+  `;
+
+  return session;
+});

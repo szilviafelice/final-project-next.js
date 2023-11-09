@@ -2,6 +2,7 @@ import './globals.scss';
 import { Inter } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
+import LogoutButton from './(auth)/logout/LogoutButton';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
           <div>
             <Link href="/register">Register</Link>
             <Link href="/login">Login</Link>
+            <LogoutButton />
           </div>
 
         </nav>
