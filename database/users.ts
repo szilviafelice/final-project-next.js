@@ -65,3 +65,20 @@ export const getUserWithPasswordHashByUsername = cache(async (username: string) 
     return user;
 },
 );
+
+
+export const getUserBySessionToken = cache(async (token: string) => {
+  const [user] = await sql<User[]>`
+    SELECT
+      users.id,
+      users.username
+    FROM
+      users
+      INNER JOIN sessions ON (
+        sessions.token = ${token}
+        AND sessions.user_id = users.id
+        AND sessions.expiry_timestamp > now ()
+      )
+  `;
+  return user;
+});

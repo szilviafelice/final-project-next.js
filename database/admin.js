@@ -1,4 +1,4 @@
-const admins = [
+/* const admins = [
 
   {
 
@@ -9,4 +9,4 @@ const admins = [
     adminPermission: 'full',
   },
 
-];
+]; */

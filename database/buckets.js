@@ -1,4 +1,4 @@
-const buckets = [
+/* const buckets = [
   {
     id: '1',
     userId: '',
@@ -12,4 +12,4 @@ const buckets = [
     actualExpenses: '',
     isShared: '',
   },
-];
+]; */

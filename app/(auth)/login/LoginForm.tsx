@@ -40,6 +40,7 @@ export default function LoginForm(props: Props) {
       getSafeReturnToPath(props.returnTo) || `/profile/${data.user.username}`,
     );
 
+    router.refresh();
 }
 
   return (

@@ -38,6 +38,8 @@ export default function RegisterForm() {
 
     router.push(`/profile/${data.user.username}`);
 
+    router.refresh();
+
     /* if (response.ok) {
       const data = await response.json();
       console.log('Check: ', data);
