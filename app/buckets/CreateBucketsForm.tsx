@@ -21,6 +21,35 @@ export default function CreateBucketForm({ userId }: { userId: number }) {
 
   const router = useRouter();
 
+  const handleImageFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files && event.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('image', file);
+
+      try {
+        const response = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (!response.ok) {
+          throw new Error('File upload failed');
+        };
+
+        const data = await response.json();
+        setImageUrl(data.imageUrl);
+
+      } catch (error) {
+        console.error('Upload error:', error);
+      }
+
+      console.log("Selected file:", file);
+    }
+  };
+
+
+
   async function handleCreateBucket() {
     await fetch('/api/notes', {
       method: 'POST',
@@ -39,6 +68,7 @@ export default function CreateBucketForm({ userId }: { userId: number }) {
       }),
     });
     router.refresh();
+
 
       setBucketName('');
       setBucketTheme('');
@@ -109,7 +139,16 @@ export default function CreateBucketForm({ userId }: { userId: number }) {
           isClearable
         />
       <br />
+      <label>
+        Upload image:
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageFileChange}
+        />
+      </label>
+      <br />
       <button>Create +</button>
     </form>
   );
-}
+ }
