@@ -8,7 +8,6 @@ export type UserWithPasswordHash = User & {
 };
 
 
-
 export const createUser = cache(
   async (firstname: string, lastname: string, username: string, passwordHash: string, email: string) => {
     const [user] = await sql<User[]>`

@@ -20,7 +20,6 @@
     "react": "^18",
     "react-datepicker": "^4.21.0",
     "react-dom": "^18",
-    "sass": "^1.69.4",
     "sharp": "^0.32.6",
     "tsm": "^2.3.0"
   },
@@ -31,8 +30,12 @@
     "@types/react-dom": "^18.2.14",
     "eslint-config-upleveled": "^5.1.1",
     "libpg-query": "^15.0.2",
+    "prettier": "^3.1.0",
+    "prettier-plugin-tailwindcss": "^0.5.7",
+    "sass": "^1.69.4",
     "stylelint": "^15.11.0",
     "stylelint-config-upleveled": "^1.0.2",
+    "tailwindcss": "^3.3.5",
     "typescript": "^5.2.2"
   }
 }

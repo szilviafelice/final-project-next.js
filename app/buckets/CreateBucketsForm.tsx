@@ -51,7 +51,7 @@ export default function CreateBucketForm({ userId }: { userId: number }) {
 
 
   async function handleCreateBucket() {
-    await fetch('/api/notes', {
+    await fetch('/api/buckets', {
       method: 'POST',
       body: JSON.stringify({
       user_id: userId,

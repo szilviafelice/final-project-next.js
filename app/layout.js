@@ -1,4 +1,5 @@
-import './globals.scss';
+// import './globals.scss';
+import './global.css';
 import { Inter } from 'next/font/google';
 import { cookies } from 'next/headers';
 import Image from 'next/image';

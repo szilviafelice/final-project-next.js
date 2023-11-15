@@ -1,10 +1,7 @@
-import Image from 'next/image';
+import './global.css';
 
 export default function Home() {
   return (
-    <main>
-
-<Image src="/neonDot.png" alt="neon dot" width={1000} height={853} />
-    </main>
+    <div className="p-4 bg-blue-500 text-white">Hello, Tailwind!</div>
   )
 }
