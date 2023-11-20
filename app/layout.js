@@ -1,8 +1,6 @@
-// import './globals.scss';
-import './global.css';
+import './globals.scss';
 import { Inter } from 'next/font/google';
 import { cookies } from 'next/headers';
-import Image from 'next/image';
 import Link from 'next/link';
 import { getUserBySessionToken } from '../database/users';
 import LogoutButton from './(auth)/logout/LogoutButton';
@@ -30,10 +28,6 @@ export default async function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <nav>
-        <div className="headerLogo">
-           <Image src="/logo.png" alt="Company logo" width={140} height={40} />
-          </div>
-
           <div>
             <Link href="/">Home</Link>
             <Link href="/about">About</Link>
@@ -52,12 +46,11 @@ export default async function RootLayout({ children }) {
                   <Link href="/login">Login</Link>
                   </>
                 )}
-
-
           </div>
-
         </nav>
-        {children}
+        <div>
+          {children}
+        </div>
         <div>
         <footer className="footer">
           <p>© 2023  MoveForward | All rights reserved.</p>

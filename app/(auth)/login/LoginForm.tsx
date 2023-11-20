@@ -37,25 +37,28 @@ export default function LoginForm(props: Props) {
 
 
     router.push(
-      getSafeReturnToPath(props.returnTo) || `/profile/${data.user.username}`,
-    );
+      getSafeReturnToPath(props.returnTo) || `/`);
 
     router.refresh();
 }
 
   return (
+    <div className="form-container">
     <form onSubmit={async (event) => await handleRegister(event)}>
 
       <label>
         Username
         <input onChange={(event) => setUsername(event.currentTarget.value)} />
       </label>
+      < br/>
+      < br/>
       <label>
         Password
         <input type="password"
         onChange={(event) => setPassword(event.currentTarget.value)} />
       </label>
-
+      < br/>
+      < br/>
       <button>Login</button>
 
       {errors.map((error) => (
@@ -64,6 +67,6 @@ export default function LoginForm(props: Props) {
         </div>
       ))}
 
-      </form>
+      </form> </div>
   )
 }

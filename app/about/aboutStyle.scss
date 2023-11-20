@@ -1,7 +1,8 @@
 .div {
-  border-style: outset;
+  border-width: 10px;
+  border-style: solid;
   border-color: #000000;
-  box-shadow: 10px 10px #68FF45;
+  box-shadow: 15px 15px #68FF45;
   height: 400px;
   width: 800px;
   padding-top: 30px;
@@ -12,7 +13,7 @@
 }
 
 .h1 {
-  color: rgb(10, 2, 2);
+  color: rgb(0, 0, 0);
   text-shadow: 2px 2px #68FF45;
 }
 

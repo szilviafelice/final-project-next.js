@@ -1,5 +1,6 @@
 'use client';
 import 'react-datepicker/dist/react-datepicker.css';
+import { Button, Input, Option, Select } from '@mui/joy';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
@@ -88,12 +89,13 @@ export default function CreateBucketForm({ userId }: { userId: number }) {
         await handleCreateBucket();
       }}
     >
-      <label>
-        Name your bucket:
-        <input
-          value={bucketName}
-          onChange={(event) => setBucketName(event.currentTarget.value)} />
+      <label htmlFor="bucketName">Name your bucket:
       </label>
+        <Input
+          id="bucketName"
+          value={bucketName}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => setBucketName(event.currentTarget.value)}
+        />
       <br />
       <label>
        Theme:
