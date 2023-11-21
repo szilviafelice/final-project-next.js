@@ -3,9 +3,10 @@ import style from './aboutStyle.scss';
 
 export default function AboutPage() {
   return (
-  <main className="main">
-
-  <h1 className="h1">WELCOME to Your Ultimate Bucket List Planner!</h1>
+    <main className="main">
+    <div className="container">
+      <div className="about-left-side">
+        <h1 className="h1">WELCOME to Your Ultimate Bucket List Planner!</h1>
     <br />
     <br />
   <div className="div">
@@ -31,16 +32,11 @@ export default function AboutPage() {
     <br />
     <br />
 
-  <h2>The story about 'How to collect all the information and how to follow the line' </h2>
-    <br />
-  <div>
-  <p>For me, the key to setting goals and achieving them always begins with visualization. <br /> You have to create a picture in your mind of what you want to achieve and imagine it's <br /> already true. Then it's almost easy to get there because you know what it is you want <br /> — it just takes time and work.
-    <br />
-    <br />
-
-  Arnold Schwarzenegger</p>
   </div>
-
-      </main>
-  )
+        <div className="about-right-side">
+          {/* The right side will automatically have the background image */}
+        </div>
+      </div>
+    </main>
+  );
 }

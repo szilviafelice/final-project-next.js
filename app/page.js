@@ -21,11 +21,10 @@ function Home() {
             </div>
           </div>
           <div className="right-side">
-            <div className="text-overlay">
-              <bold>MOVEFORWARD</bold>
+
             </div>
           </div>
-        </div>
+
       </>
     );
 }
