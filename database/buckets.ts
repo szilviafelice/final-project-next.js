@@ -45,5 +45,5 @@ if (result.length === 0) {
 }
 
 // Otherwise, return the first item in the array
-return result[0];
+return result[0] as Bucket;
 };

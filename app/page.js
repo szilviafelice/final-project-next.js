@@ -1,6 +1,6 @@
+import './globals.scss';
 import Head from 'next/head';
 import React from 'react';
-import styles from './globals.scss';
 
 function Home() {
     return (
@@ -20,9 +20,7 @@ function Home() {
               <p className="footer-text">All Managed Seamlessly in One Platform.</p>
             </div>
           </div>
-          <div className="right-side">
-
-            </div>
+          <div className="right-side" />
           </div>
 
       </>

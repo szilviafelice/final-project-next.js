@@ -18,7 +18,7 @@ export default async function LoginPage({ searchParams }: Props) {
   if(session) redirect('/');
 
   return (
-    <div>
+    <div className="form-container login-form-container">
       <LoginForm returnTo={searchParams.returnTo} />
     </div>
   );

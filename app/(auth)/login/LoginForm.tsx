@@ -44,9 +44,10 @@ export default function LoginForm(props: Props) {
 
   return (
     <div className="form-container">
+    <h2>Happy to see you again.</h2>
     <form onSubmit={async (event) => await handleRegister(event)}>
 
-      <label>
+        <label>
         Username
         <input onChange={(event) => setUsername(event.currentTarget.value)} />
       </label>

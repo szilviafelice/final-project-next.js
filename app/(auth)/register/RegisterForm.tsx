@@ -54,23 +54,23 @@ export default function RegisterForm() {
       <label>
         First name
         <input onChange={(event) => setFirstname(event.currentTarget.value)} />
-      </label>
+      </label> < br/>< br/>
       <label>
         Last name
         <input onChange={(event) => setLastname(event.currentTarget.value)} />
-      </label>
+      </label> < br/>< br/>
       <label>
         Username
         <input onChange={(event) => setUsername(event.currentTarget.value)} />
-      </label>
+      </label>< br/>< br/>
       <label>
         Password
         <input type="password" onChange={(event) => setPassword(event.currentTarget.value)} />
-      </label>
+      </label>< br/>< br/>
       <label>
         Email
-        <input onChange={(event) => setEmail(event.currentTarget.value)} />
-      </label>
+        <input onChange={(event) => setEmail(event.currentTarget.value)} /> < br/>< br/>
+      </label>< br/>
       <button  >Register</button>
 
       {errors.map((error) => (

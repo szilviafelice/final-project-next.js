@@ -1,6 +1,5 @@
 'use client';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Button, Input, Option, Select } from '@mui/joy';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
@@ -21,6 +20,36 @@ export default function CreateBucketForm({ userId }: { userId: number }) {
 
 
   const router = useRouter();
+
+  const calculateMonthsUntilEvent = () => {
+    if (!startDate) {
+      return 0; // No start date means no months to calculate
+    }
+    const now = new Date();
+    const start = new Date(startDate);
+    if (start <= now) {
+      return 0; // Start date is in the past
+    }
+    const months = (start.getFullYear() - now.getFullYear()) * 12 + start.getMonth() - now.getMonth();
+    // Check if start date's day is later in the month than the current day
+    if (start.getDate() > now.getDate()) {
+      return months + 1;
+    }
+    return months;
+  };
+  const calculateAmountToSave = () => {
+    const estimated = parseFloat(estimatedExpense) || 0;
+    const actual = parseFloat(actualExpense) || 0;
+    console.log(`Amount to save: ${estimated - actual}`);
+    return Math.max(0, estimated - actual);
+  };
+
+  const calculateMonthlySavings = () => {
+    const amountToSave = calculateAmountToSave();
+    const monthsUntilEvent = calculateMonthsUntilEvent();
+    console.log(`Amount to save: ${amountToSave}, Months until event: ${monthsUntilEvent}`);
+    return monthsUntilEvent > 0 ? (amountToSave / monthsUntilEvent).toFixed(2) : '0.00';
+  };
 
   const handleImageFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
@@ -56,21 +85,21 @@ export default function CreateBucketForm({ userId }: { userId: number }) {
       method: 'POST',
       body: JSON.stringify({
       user_id: userId,
-      name: bucketName,
-      theme: bucketTheme,
-      text_description: textDescription,
-      date: bucketDate,
-      url: bucketUrl,
-      image_url: imageUrl,
-      budget: bucketBudget,
-      estimated_expense: estimatedExpense,
-      actual_expense: actualExpense,
+      name: bucketName || "Default Name",
+      theme: bucketTheme || "Default Theme",
+      text_description: textDescription || "Default Description",
+      date: bucketDate ? bucketDate.toISOString() : null,
+      url: bucketUrl || "Default URL",
+      image_url: imageUrl || "Default Image URL",
+      budget: bucketBudget ? parseFloat(bucketBudget) : 0,
+      estimated_expense: parseFloat(estimatedExpense) || 0,
+      actual_expense: parseFloat(actualExpense) || 0,
       is_shared: isShared
       }),
     });
+
+    // console.log("Sending payload:", payload);
     router.refresh();
-
-
       setBucketName('');
       setBucketTheme('');
       setTextDescription('');
@@ -89,13 +118,12 @@ export default function CreateBucketForm({ userId }: { userId: number }) {
         await handleCreateBucket();
       }}
     >
-      <label htmlFor="bucketName">Name your bucket:
+      <label htmlFor="bucketName">Name your bucketlist:
       </label>
-        <Input
+        <input
           id="bucketName"
           value={bucketName}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => setBucketName(event.currentTarget.value)}
-        />
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => setBucketName(event.currentTarget.value)}/>
       <br />
       <label>
        Theme:
@@ -114,10 +142,29 @@ export default function CreateBucketForm({ userId }: { userId: number }) {
         <textarea
           value={textDescription}
           onChange={(event) => setTextDescription(event.currentTarget.value)}
-          rows={4}
+          rows={3}
           cols={50} />
       </label>
       <br />
+      <label>
+            Estimated Expense:
+            <input
+              type="number"
+              value={estimatedExpense}
+              onChange={(e) => setEstimatedExpense(e.target.value)}
+            />     €
+          </label>
+          <label>
+            Actual Expense:
+            <input
+              type="number"
+              value={actualExpense}
+              onChange={(e) => setActualExpense(e.target.value)}
+            />    €
+          </label>
+          <p>
+          Let's save up: {calculateAmountToSave().toFixed(2)} Euros
+          </p>
       <label htmlFor="startDate">From:</label>
         <ReactDatePicker
           id="startDate"
@@ -140,7 +187,11 @@ export default function CreateBucketForm({ userId }: { userId: number }) {
           minDate={startDate}
           isClearable
         />
-      <br />
+        {startDate && endDate && (
+          <p>
+            You need to save up monthly: {calculateMonthlySavings()} Euros
+          </p>
+)}
       <label>
         Upload image:
         <input
@@ -148,8 +199,8 @@ export default function CreateBucketForm({ userId }: { userId: number }) {
           accept="image/*"
           onChange={handleImageFileChange}
         />
-      </label>
-      <br />
+      </label> <br />
+
       <button>Create +</button>
     </form>
   );

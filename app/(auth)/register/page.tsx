@@ -14,8 +14,14 @@ export default async function RegisterPage() {
   if (session) redirect('/');
 
   return (
-    <div>
-      <RegisterForm />
+    <div className="auth-page-container registration-background">
+      <div className="form-side">
+        <RegisterForm />
+      </div>
+      <div className="image-side"/>
+
+
     </div>
+
   );
 }
