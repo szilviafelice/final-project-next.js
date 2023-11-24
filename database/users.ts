@@ -7,6 +7,13 @@ export type UserWithPasswordHash = User & {
   passwordHash: string;
 };
 
+ export type UserBucket = {
+  name: string;
+  bucketId: number;
+  textContent: string;
+  username: string;
+}
+
 
 export const createUser = cache(
   async (firstname: string, lastname: string, username: string, passwordHash: string, email: string) => {
@@ -83,17 +90,15 @@ export const getUserBySessionToken = cache(async (token: string) => {
 });
 
 export const getUserBucketBySessionToken = cache(async (token: string) => {
-  const buckets = await sql<User[]>`
+  const buckets = await sql<UserBucket[]>`
     SELECT
       buckets.id AS bucket_id,
-      buckets.text_content AS text_content,
+      buckets.name AS name,
       users.username AS username
     FROM
       buckets
-    INNER JOIN
-      buckets ON buckets.user_id = users.id
-    INNER JOIN
-      sessions ON  (
+    INNER JOIN users ON buckets.user_id = users.id
+    INNER JOIN sessions ON  (
         sessions.token = ${token}
         AND sessions.user_id = users.id
         AND sessions.expiry_timestamp > now ()
