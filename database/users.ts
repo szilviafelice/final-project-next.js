@@ -73,11 +73,31 @@ export const getUserBySessionToken = cache(async (token: string) => {
       users.username
     FROM
       users
-      INNER JOIN sessions ON (
+    INNER JOIN sessions ON (
         sessions.token = ${token}
         AND sessions.user_id = users.id
         AND sessions.expiry_timestamp > now ()
       )
   `;
   return user;
+});
+
+export const getUserBucketBySessionToken = cache(async (token: string) => {
+  const buckets = await sql<User[]>`
+    SELECT
+      buckets.id AS bucket_id,
+      buckets.text_content AS text_content,
+      users.username AS username
+    FROM
+      buckets
+    INNER JOIN
+      buckets ON buckets.user_id = users.id
+    INNER JOIN
+      sessions ON  (
+        sessions.token = ${token}
+        AND sessions.user_id = users.id
+        AND sessions.expiry_timestamp > now ()
+      )
+  `;
+  return buckets;
 });

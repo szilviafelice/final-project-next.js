@@ -24,7 +24,7 @@ export default function AdminForm({ users }: Props) {
   const [emailInput, setEmailInput] = useState('');
 
   async function createUser() {
-    const response = await fetch('/api/users', { // Az endpoint-odnak megfelelően módosítsd
+    const response = await fetch('/api/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

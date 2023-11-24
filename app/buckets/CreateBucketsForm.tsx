@@ -1,37 +1,31 @@
 'use client';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
 
 export default function CreateBucketForm({ userId }: { userId: number }) {
-  const [bucketName, setBucketName] = useState('');
-  const [bucketTheme, setBucketTheme] = useState('');
+  const [bucketName, setBucketName] = useState<string>("");
+  const [bucketTheme, setBucketTheme] = useState<string>("");
   const [textDescription, setTextDescription] = useState('');
-  const [bucketDate, setBucketDate] = useState<Date | null>(new Date());
-  const [bucketUrl, setBucketUrl] = useState('');
   const [imageUrl, setImageUrl] = useState('');
-  const [bucketBudget, setBucketBudget] = useState('');
   const [estimatedExpense, setEstimatedExpense] = useState('');
   const [actualExpense, setActualExpense] = useState('');
-  const [isShared, setIsShared] = useState(false);
+  // const [isShared, setIsShared] = useState(false);
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
 
-  const router = useRouter();
-
   const calculateMonthsUntilEvent = () => {
     if (!startDate) {
-      return 0; // No start date means no months to calculate
+      return 0;
     }
     const now = new Date();
     const start = new Date(startDate);
     if (start <= now) {
-      return 0; // Start date is in the past
+      return 0;
     }
     const months = (start.getFullYear() - now.getFullYear()) * 12 + start.getMonth() - now.getMonth();
-    // Check if start date's day is later in the month than the current day
+
     if (start.getDate() > now.getDate()) {
       return months + 1;
     }
@@ -79,38 +73,41 @@ export default function CreateBucketForm({ userId }: { userId: number }) {
   };
 
 
-
   async function handleCreateBucket() {
-    await fetch('/api/buckets', {
-      method: 'POST',
-      body: JSON.stringify({
-      user_id: userId,
+    console.log("handleCreateBucket function triggered");
+    const payload = {
+      userId,
       name: bucketName || "Default Name",
       theme: bucketTheme || "Default Theme",
-      text_description: textDescription || "Default Description",
-      date: bucketDate ? bucketDate.toISOString() : null,
-      url: bucketUrl || "Default URL",
-      image_url: imageUrl || "Default Image URL",
-      budget: bucketBudget ? parseFloat(bucketBudget) : 0,
-      estimated_expense: parseFloat(estimatedExpense) || 0,
-      actual_expense: parseFloat(actualExpense) || 0,
-      is_shared: isShared
-      }),
-    });
+      textDescription: textDescription || "Default Description",
+      imageUrl: imageUrl || "Default Image URL",
+      estimatedExpense: parseFloat(estimatedExpense) || 0,
+      actualExpense: parseFloat(actualExpense) || 0,
+    };
+    console.log("Payload:", payload);
+      try {
+        const response = await fetch('api/buckets', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
 
-    // console.log("Sending payload:", payload);
-    router.refresh();
-      setBucketName('');
-      setBucketTheme('');
-      setTextDescription('');
-      setBucketDate(null);
-      setBucketUrl('');
-      setImageUrl('');
-      setBucketBudget('');
-      setEstimatedExpense('');
-      setActualExpense('');
-      setIsShared(false);
-  }
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error('Error from server:', errorData);
+          throw new Error(`Server responded with ${response.status}: ${response.statusText}`);
+        }
+
+        console.log("Sending payload:", payload);
+        const data = await response.json();
+        console.log("Bucket list created successfully:", data);
+
+        } catch (error) {
+          console.error('There was a problem with the fetch operation:', error);
+        }
+        }
 
   return (
     <form onSubmit={async (event) => {
@@ -203,5 +200,5 @@ export default function CreateBucketForm({ userId }: { userId: number }) {
 
       <button>Create +</button>
     </form>
-  );
- }
+          );
+        }

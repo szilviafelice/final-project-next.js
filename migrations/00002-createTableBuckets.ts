@@ -1,5 +1,20 @@
 import { Sql } from 'postgres';
 
+export type Bucket = {
+  id: number;
+  userId: number | null;
+  name: string;
+  textDescription: string | null;
+  date: string | null;
+  url: bigint | null; //
+  imageUrl: string | null;
+  budget: number | null;
+  estimatedExpense: number | null;
+  actualExpense: number | null;
+  isShared: boolean | null;
+};
+
+
 export async function up(sql: Sql) {
 
   await sql `
