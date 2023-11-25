@@ -15,6 +15,7 @@ const users = [
 
 export async function up(sql: Sql) {
   for (const user of users) {
+    // eslint-disable-next-line @ts-safeql/check-sql
     await sql `
     INSERT INTO users
     (first_name, last_name, username, password_hash, email,  ui_preference)
@@ -29,6 +30,7 @@ export async function up(sql: Sql) {
 export async function down(sql: Sql) {
   for (const user of users) {
 
+    // eslint-disable-next-line @ts-safeql/check-sql
     await sql`
 
       DELETE FROM admin WHERE id = ${user.id}

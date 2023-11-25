@@ -1,4 +1,4 @@
-const bucketUpdates = [
+/* const bucketUpdates = [
   {
     id: 1,
     userId: 1,
@@ -15,4 +15,4 @@ const bucketUpdates = [
     content: 'Removed an item from the bucket.',
     updateTimeStamp: new Date(),
   },
-];
+]; */

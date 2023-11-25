@@ -14,6 +14,15 @@ export type UserWithPasswordHash = User & {
   username: string;
 }
 
+/* export type UserProfile = {
+  profileId: number;
+  userId: number;
+  profilePicture: string;
+  bio: string;
+  emailAddress: string;
+  username: string;
+}; */
+
 
 export const createUser = cache(
   async (firstname: string, lastname: string, username: string, passwordHash: string, email: string) => {
@@ -106,3 +115,22 @@ export const getUserBucketBySessionToken = cache(async (token: string) => {
   `;
   return buckets;
 });
+
+/* export const getUserProfileBySessionToken = async (token: string) => {
+  const [profile] = await sql<UserProfile[]>`
+    SELECT
+      profiles.profile_id AS "profileId",
+      profiles.user_id AS "userId",
+      profiles.profile_picture AS "profilePicture",
+      profiles.bio AS "bio",
+      profiles.email_address AS "emailAddress"
+    FROM
+      profiles
+    INNER JOIN sessions ON (
+        sessions.token = ${token}
+        AND sessions.user_id = profiles.user_id
+        AND sessions.expiry_timestamp > now ()
+      )
+  `;
+  return profile;
+}; */

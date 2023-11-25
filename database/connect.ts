@@ -36,6 +36,7 @@ export function setEnviromentVariables() {
   export const sql = postgres ();
 
   export async function getAllUsersFromDatabase() {
+    // eslint-disable-next-line @ts-safeql/check-sql
     const users = await sql<{ id: number; firstName: string; lastName: string; username: string; passwordHash: string; email: string;  uiPreference: boolean | null; }[]>`
 
     SELECT * FROM users

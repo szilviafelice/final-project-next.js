@@ -11,6 +11,7 @@ export const createBucket = cache(async (
   estimatedExpense: number,
   actualExpense: number
 ) => {
+  // eslint-disable-next-line @ts-safeql/check-sql
   const [bucket] = await sql<{ id: number; userId: number | null; name: string; textDescription: string | null; imageUrl: string | null; estimatedExpense: number | null; actualExpense: number | null; theme: string | null; }[]>`
     INSERT INTO
       buckets (

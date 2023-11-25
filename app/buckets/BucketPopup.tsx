@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 
 type BucketProps = {
   bucketId: number;
@@ -36,4 +36,4 @@ const BucketPopup: React.FC<BucketPopupProps> = ({ bucket, onClose, onDelete }) 
   );
 };
 
-export default BucketPopup;
+export default BucketPopup; */

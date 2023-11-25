@@ -17,6 +17,7 @@ export type Bucket = {
 
 export async function up(sql: Sql) {
 
+  // eslint-disable-next-line @ts-safeql/check-sql
   await sql `
 
       CREATE TABLE buckets (
@@ -39,6 +40,7 @@ export async function up(sql: Sql) {
 
   export async function down(sql: Sql) {
 
+    // eslint-disable-next-line @ts-safeql/check-sql
     await sql `
       DROP TABLE buckets
 

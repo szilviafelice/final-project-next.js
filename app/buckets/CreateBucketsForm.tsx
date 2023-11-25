@@ -2,8 +2,10 @@
 import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
+import styles from './bucket.module.scss';
 
 export default function CreateBucketForm({ userId }: { userId: number }) {
+
   const [bucketName, setBucketName] = useState<string>("");
   const [bucketTheme, setBucketTheme] = useState<string>("");
   const [textDescription, setTextDescription] = useState('');

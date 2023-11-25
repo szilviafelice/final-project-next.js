@@ -74,6 +74,15 @@ body {
   background-size: cover;
   background-position: center;
 }
+
+
+.backgroundLog {
+  background-image: linear-gradient(to right bottom, #dfff6d, #d1ff76, #c2ff7f, #b5ff89, #a7ff93);
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  height: calc(100vh - 50px);
+}
 .login-form-container {
   margin-top: 5rem;
   margin-left: auto;
@@ -108,6 +117,7 @@ body {
   padding-left: 50px;
   text-align: center;
   border-radius: 5px;
+
 }
 
 .text-container {
@@ -131,49 +141,8 @@ body {
 }
 
 
-.buckets-page-container {
-  background-image: url('/neonshapes.jpeg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
-  width: 100vw;
 
 
-}
-
-.h2bucket {
-  margin-top: var(20rem);
-  text-align: center;
-  z-index: 2;
-}
-
-.bucket-form-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 80vh;
-  width: 100%;
-
-
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 100px;
-    justify-content: center;
-    width: 100%;
-    max-width: 700px;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-
-
-  }
-}
 
 // Reg, Login pages style:
 .auth-page-container {
@@ -190,12 +159,12 @@ body {
   justify-content: center;
   align-items: center;
   padding: 20px;
-  border-style: solid;
   box-shadow: 15px 15px #68FF45, -15px 15px #C1E835;
   max-width: 700px;
   max-height: 300px;
   margin-top: calc((100vh - 400px) / 2);
   margin-left: 50px;
+  background-image: linear-gradient(to right bottom, #dfff6d, #d1ff76, #c2ff7f, #b5ff89, #a7ff93);
 
 }
 

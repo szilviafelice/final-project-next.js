@@ -52,24 +52,24 @@ export default function RegisterForm() {
   return (
     <form onSubmit={async (event) => await handleRegister(event)}>
       <label>
-        First name
+        First name&nbsp;&nbsp;
         <input onChange={(event) => setFirstname(event.currentTarget.value)} />
-      </label> < br/>< br/>
+      </label>
       <label>
-        Last name
+        Last name&nbsp;&nbsp;
         <input onChange={(event) => setLastname(event.currentTarget.value)} />
-      </label> < br/>< br/>
+      </label> < br/>
       <label>
-        Username
+        Username&nbsp;&nbsp;
         <input onChange={(event) => setUsername(event.currentTarget.value)} />
-      </label>< br/>< br/>
+      </label>< br/>
       <label>
-        Password
+        Password&nbsp;&nbsp;
         <input type="password" onChange={(event) => setPassword(event.currentTarget.value)} />
-      </label>< br/>< br/>
+      </label>< br/>
       <label>
-        Email
-        <input onChange={(event) => setEmail(event.currentTarget.value)} /> < br/>< br/>
+        Email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input onChange={(event) => setEmail(event.currentTarget.value)} /> < br/>
       </label>< br/>
       <button  >Register</button>
 

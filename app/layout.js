@@ -31,8 +31,10 @@ export default async function RootLayout({ children }) {
           <div>
             <Link href="/">Home</Link>
             <Link href="/about">About</Link>
-            <Link href="/users-admin">Admin</Link>
             <Link href="/buckets">Buckets</Link>
+            <Link href="/users/username">Profile</Link>
+
+
           </div>
           <div>
             {user ? (

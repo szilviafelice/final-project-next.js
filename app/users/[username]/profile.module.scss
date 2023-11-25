@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.profile {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #030303;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-image: linear-gradient(to right bottom, #00f6ff, #5bfbe6, #8dffce, #b8ffba, #dfffad);
+}
+
+.profile img {
+  max-width: 200px;
+  border-radius: 200px;
+}
+
+.profile h1 {
+  font-size: 24px;
+  margin: 10px 0;
+}
+
+
+.profile p {
+  font-size: 16px;
+}
+
+.profile button {
+  padding: 10px 20px;
+  background-color: rgb(249, 250, 250);
+  color: #070707;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
