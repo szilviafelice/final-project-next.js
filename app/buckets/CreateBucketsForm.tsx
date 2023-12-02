@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from 'react';
@@ -112,12 +113,12 @@ export default function CreateBucketForm({ userId }: { userId: number }) {
         }
 
   return (
-    <form onSubmit={async (event) => {
+    <form className={styles['form']} onSubmit={async (event) => {
         event.preventDefault();
         await handleCreateBucket();
       }}
     >
-      <label htmlFor="bucketName">Name your bucketlist:
+      <label htmlFor="bucketName">Name your bucketlist:&nbsp;&nbsp;&nbsp;&nbsp;
       </label>
         <input
           id="bucketName"
@@ -125,7 +126,7 @@ export default function CreateBucketForm({ userId }: { userId: number }) {
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => setBucketName(event.currentTarget.value)}/>
       <br />
       <label>
-       Theme:
+       Theme:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <select value={bucketTheme} onChange={(event) => setBucketTheme(event.target.value)}>
           <option value="">Select a Theme</option>
           <option value="travel">Travel</option>
@@ -137,24 +138,24 @@ export default function CreateBucketForm({ userId }: { userId: number }) {
       </label>
       <br />
       <label>
-        The plan:
+        The plan:&nbsp;&nbsp;&nbsp;&nbsp;
         <textarea
           value={textDescription}
           onChange={(event) => setTextDescription(event.currentTarget.value)}
           rows={3}
           cols={50} />
-      </label>
-      <br />
+      </label><br />    <br />
+
       <label>
-            Estimated Expense:
+            Estimated Expense:< br/>
             <input
               type="number"
               value={estimatedExpense}
               onChange={(e) => setEstimatedExpense(e.target.value)}
             />     €
-          </label>
+          </label> <br />
           <label>
-            Actual Expense:
+            Actual Expense:< br/>
             <input
               type="number"
               value={actualExpense}
@@ -162,7 +163,7 @@ export default function CreateBucketForm({ userId }: { userId: number }) {
             />    €
           </label>
           <p>
-          Let's save up: {calculateAmountToSave().toFixed(2)} Euros
+          Let's save up: {calculateAmountToSave().toFixed(2)} Euros < br/>
           </p>
       <label htmlFor="startDate">From:</label>
         <ReactDatePicker
@@ -192,7 +193,7 @@ export default function CreateBucketForm({ userId }: { userId: number }) {
           </p>
 )}
       <label>
-        Upload image:
+        Upload image:&nbsp;&nbsp;&nbsp;&nbsp;
         <input
           type="file"
           accept="image/*"
@@ -202,5 +203,8 @@ export default function CreateBucketForm({ userId }: { userId: number }) {
 
       <button>Create +</button>
     </form>
+
+
+
           );
         }

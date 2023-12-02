@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import React from 'react';
@@ -5,6 +6,7 @@ import {
   getUserBucketBySessionToken,
   getUserBySessionToken,
 } from '../../database/users';
+import styles from './bucket.module.scss';
 import CreateBucketsForm from './CreateBucketsForm';
 
 export default async function BucketsPage() {
@@ -20,8 +22,8 @@ const user = sessionTokenCookie &&
     console.log("userBucket array:", userBucket);
 
     return (
-      <div className="buckets-page-container">
-      <div className="bucket-form-container">
+      <div className={styles['buckets-page-container']}>
+      <div className={styles['bucket-form-container']}>
           <CreateBucketsForm userId={user.id} />
           <br />
           <br />
@@ -31,8 +33,8 @@ const user = sessionTokenCookie &&
              <h2>Bucketslists for {user.username}</h2>
             <ul>
               {userBucket.map((bucket) => (
-                // Make sure that bucketId is the correct property and is unique
-                <li key={`bucket-${bucket.bucketId}`}>{bucket.name}</li> // Changed textContent to name
+
+                <li key={`bucket-${bucket.bucketId}`}>{bucket.name}</li>
               ))}
             </ul>
           </>

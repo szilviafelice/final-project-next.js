@@ -37,7 +37,7 @@ export default function RegisterForm() {
       return;
     }
 
-    router.push(`/profile/${data.user.username}`);
+    router.push(`/buckets`);
 
     router.refresh();
 

@@ -1,6 +1,5 @@
-/* This will be the main background for the BucketsPage */
+
 .buckets-page-container {
-  background-image: url('/path-to-your-page-background.jpg'); /* Replace with your background image */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -10,39 +9,37 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-image: url('/neonshapes.jpeg');
 }
 
-/* This will style the CreateBucketsForm container */
+
 .bucket-form-container {
-  border: 3px solid #FFFFFF; /* White border */
-  background-image: url('/neonshapes.jpeg'); /* Replace with your neon shapes image */
   background-size: cover;
   background-position: center;
-  backdrop-filter: blur(8px); /* Creates the blur effect */
-  -webkit-backdrop-filter: blur(8px); /* For Safari */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   padding: 20px;
-  max-width: 700px;
-  width: 100%; /* Full width */
-  margin: 0 auto; /* Centers the container */
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  overflow: hidden; /* Ensures no overflow due to blur effect */
+  overflow: hidden;
 }
 
-/* Styling for the list of bucket lists */
-ul {
+.ul {
   list-style: none;
   padding: 0;
 }
 
-ul li {
+.ul li {
   background: rgba(255, 255, 255, 0.8);
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 5px;
+  align-items: center;
 }
 
-/* Styling for the headers */
-h2 {
+.h2 {
   color: #fff;
   text-shadow: 2px 2px 4px #000;
 }
